@@ -37,7 +37,8 @@ function isValid(ccnum){
   for (var i = formattedCcnum.length - 1; i > 0; i=i-2) {
     formattedCcnum[i] = (formattedCcnum[i] * 2);
   }
-  var reducedCC = formattedCcnum.reduce((a, v) => a + v, 0);
+  var reformattedCcnum = formattedCcnum.toString().replace(/,/g, '').split('').map(Number);
+  var reducedCC = reformattedCcnum.reduce((a, v) => a + v, 0);
   if (reducedCC % 10 === 0) {
     return true;
   } else {
@@ -47,5 +48,5 @@ function isValid(ccnum){
 
 // tests
 // ---
-console.assert(isValid("4408 0412 3456 7893") === false)
+console.assert(isValid("4408 0412 3456 7893") === true)
 console.assert(isValid("5000000000000000") === false)
